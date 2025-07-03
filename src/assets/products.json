@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "name": "Smart Watch",
+    "description": "Fitness tracking smartwatch with heart rate monitor.",
+    "price": 99.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "smart-watch"
+  },
+  {
+    "id": 2,
+    "name": "4K Monitor",
+    "description": "27-inch 4K UHD monitor with HDR support.",
+    "price": 299.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "4k-monitor"
+  },
+  {
+    "id": 3,
+    "name": "Wireless Earbuds",
+    "description": "Bluetooth earbuds with noise cancellation.",
+    "price": 79.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "wireless-earbuds"
+  },
+  {
+    "id": 4,
+    "name": "Gaming Mouse",
+    "description": "High precision gaming mouse with customizable buttons.",
+    "price": 49.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "gaming-mouse"
+  },
+  {
+    "id": 5,
+    "name": "Mechanical Keyboard",
+    "description": "RGB mechanical keyboard with programmable keys.",
+    "price": 89.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "mechanical-keyboard"
+  },
+  {
+    "id": 6,
+    "name": "Portable Charger",
+    "description": "High capacity portable charger for smartphones and tablets.",
+    "price": 29.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "portable-charger"
+  },
+  {
+    "id": 7,
+    "name": "Smart Speaker",
+    "description": "Voice-controlled smart speaker with built-in assistant.",
+    "price": 129.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "smart-speaker"
+  },
+  {
+    "id": 8,
+    "name": "Fitness Tracker",
+    "description": "Wearable fitness tracker with step counter and sleep monitor.",
+    "price": 59.99,
+    "image": "https://via.placeholder.com/150",
+    "slug": "fitness-tracker"
+  }
+]
