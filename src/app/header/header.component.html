@@ -1,0 +1,6 @@
+<mat-toolbar color="primary" class="flex justify-between">
+  <a routerLink="/" class="text-white font-bold">Mini Commerce</a>
+  <a routerLink="/cart" class="text-white">
+    Cart ({{ cartItemCount$ | async }})
+  </a>
+</mat-toolbar>
