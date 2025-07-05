@@ -1,11 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-checkout-success',
-  imports: [],
-  templateUrl: './checkout-success.component.html',
-  styleUrl: './checkout-success.component.css'
+  standalone: true,
+  imports: [ RouterModule],
+  templateUrl: './checkout-success.component.html'
 })
-export class CheckoutSuccessComponent {
+export class CheckoutSuccessComponent implements OnInit {
+  orderId: number | null = null;
 
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      this.orderId = params['orderId'] ? +params['orderId'] : null;
+    });
+  }
 }

@@ -1,6 +1,6 @@
-<mat-toolbar color="primary" class="flex justify-between">
-  <a routerLink="/" class="text-white font-bold">Mini Commerce</a>
+<header class="bg-blue-600 text-white p-4 flex justify-between items-center">
+  <a routerLink="/" class="font-bold text-lg">Mini Commerce</a>
   <a routerLink="/cart" class="text-white">
     Cart ({{ cartItemCount$ | async }})
   </a>
-</mat-toolbar>
+</header>

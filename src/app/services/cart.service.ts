@@ -20,35 +20,36 @@ export class CartService {
     }
   }
 
-  addToCart(productId: number, quantity: number = 1): void {
-    const currentCart = [...this.cartSubject.value];
-    const itemIndex = currentCart.findIndex(item => item.productId === productId);
-    if (itemIndex > -1) {
-      currentCart[itemIndex].quantity += quantity;
+  addToCart(productId: number) {
+    const currentCart = this.cartSubject.value;
+    const existingItem = currentCart.find(item => item.productId === productId);
+    if (existingItem) {
+      existingItem.quantity++;
     } else {
-      currentCart.push({ productId, quantity });
+      currentCart.push({ productId, quantity: 1 });
     }
-    this.updateCart(currentCart);
+    this.cartSubject.next([...currentCart]);
+    localStorage.setItem('cart', JSON.stringify(this.cartSubject.value));
   }
 
-  removeFromCart(productId: number): void {
+  updateQuantity(productId: number, quantity: number) {
+    const currentCart = this.cartSubject.value;
+    const item = currentCart.find(i => i.productId === productId);
+    if (item) {
+      item.quantity = quantity;
+      this.cartSubject.next([...currentCart]);
+      localStorage.setItem('cart', JSON.stringify(this.cartSubject.value));
+    }
+  }
+
+  removeFromCart(productId: number) {
     const currentCart = this.cartSubject.value.filter(item => item.productId !== productId);
-    this.updateCart(currentCart);
+    this.cartSubject.next(currentCart);
+    localStorage.setItem('cart', JSON.stringify(currentCart));
   }
 
-  updateQuantity(productId: number, quantity: number): void {
-    const currentCart = this.cartSubject.value.map(item =>
-      item.productId === productId ? { ...item, quantity } : item
-    );
-    this.updateCart(currentCart);
-  }
-
-  clearCart(): void {
-    this.updateCart([]);
-  }
-
-  private updateCart(cart: CartItem[]): void {
-    this.cartSubject.next(cart);
-    localStorage.setItem('cart', JSON.stringify(cart));
+  clearCart() {
+    this.cartSubject.next([]);
+    localStorage.removeItem('cart');
   }
 }

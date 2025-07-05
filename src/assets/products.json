@@ -12,7 +12,7 @@
     "name": "4K Monitor",
     "description": "27-inch 4K UHD monitor with HDR support.",
     "price": 299.99,
-    "image": "https://via.placeholder.com/150",
+    "image": "assets/images/monitor.jpg",
     "slug": "4k-monitor"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Wireless Earbuds",
     "description": "Bluetooth earbuds with noise cancellation.",
     "price": 79.99,
-    "image": "https://via.placeholder.com/150",
+    "image": "./images/earbuds.jpg",
     "slug": "wireless-earbuds"
   },
   {
@@ -28,7 +28,7 @@
     "name": "Gaming Mouse",
     "description": "High precision gaming mouse with customizable buttons.",
     "price": 49.99,
-    "image": "https://via.placeholder.com/150",
+    "image": "images/gaming-mouse.jpg",
     "slug": "gaming-mouse"
   },
   {
@@ -36,7 +36,7 @@
     "name": "Mechanical Keyboard",
     "description": "RGB mechanical keyboard with programmable keys.",
     "price": 89.99,
-    "image": "https://via.placeholder.com/150",
+    "image": "images/keyboard.jpg",
     "slug": "mechanical-keyboard"
   },
   {
@@ -44,7 +44,7 @@
     "name": "Portable Charger",
     "description": "High capacity portable charger for smartphones and tablets.",
     "price": 29.99,
-    "image": "https://via.placeholder.com/150",
+    "image": "images/charger.jpg",
     "slug": "portable-charger"
   },
   {
@@ -52,15 +52,15 @@
     "name": "Smart Speaker",
     "description": "Voice-controlled smart speaker with built-in assistant.",
     "price": 129.99,
-    "image": "https://via.placeholder.com/150",
+    "image": "images/smart-speaker.jpg",
     "slug": "smart-speaker"
   },
   {
     "id": 8,
-    "name": "Fitness Tracker",
-    "description": "Wearable fitness tracker with step counter and sleep monitor.",
+    "name": "Laptop",
+    "description": "High-performance laptop with 16GB RAM and 512GB SSD.",
     "price": 59.99,
-    "image": "https://via.placeholder.com/150",
-    "slug": "fitness-tracker"
+    "image": "images/laptop.jpg",
+    "slug": "laptop"
   }
 ]

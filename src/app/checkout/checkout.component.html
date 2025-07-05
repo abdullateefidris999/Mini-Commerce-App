@@ -1,1 +1,30 @@
-<p>checkout works!</p>
+<!-- checkout.component.html -->
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto mt-8 space-y-4">
+  <div>
+    <label class="block text-sm font-medium">Name</label>
+    <input
+      type="text"
+      formControlName="name"
+      class="w-full p-2 border rounded">
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Email</label>
+    <input
+      type="email"
+      formControlName="email"
+      class="w-full p-2 border rounded">
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Card Number</label>
+    <input
+      type="text"
+      formControlName="cardNumber"
+      class="w-full p-2 border rounded">
+  </div>
+  <button
+    type="submit"
+    [disabled]="checkoutForm.invalid"
+    class="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600 disabled:bg-gray-400 disabled:cursor-not-allowed">
+    Place Order
+  </button>
+</form>

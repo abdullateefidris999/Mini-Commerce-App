@@ -1,11 +1,49 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CartService } from '../services/cart.service';
+import { ProductService } from '../services/product.service';
+import { AsyncPipe, CommonModule, CurrencyPipe } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { combineLatest, map, Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { Product } from '../models/product';
 
 @Component({
   selector: 'app-cart',
-  imports: [],
-  templateUrl: './cart.component.html',
-  styleUrl: './cart.component.css'
+  standalone: true,
+  imports: [AsyncPipe, CurrencyPipe, CommonModule,FormsModule, RouterModule],
+  templateUrl: './cart.component.html'
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
+  cartItems$!: Observable<{ product: Product; quantity: number }[]>; // Explicitly define the type
+  total$!: Observable<number>; // Explicitly define the type
 
+  constructor(
+    private cartService: CartService,
+    private productService: ProductService,
+  ) {}
+
+  ngOnInit() {
+    // Initialize cartItems$ and total$ inside ngOnInit
+    this.cartItems$ = combineLatest([this.cartService.cart$, this.productService.products$]).pipe(
+      map(([cart, products]) => cart.map(item => ({
+        product: products.find(p => p.id === item.productId)!,
+        quantity: item.quantity
+      })))
+    );
+
+    this.total$ = this.cartItems$.pipe(
+      map((items: { product: Product; quantity: number }[]) => items.reduce((sum, item) => sum + item.product.price * item.quantity, 0))
+    );
+  }
+
+  updateQuantity(productId: number, quantity: number) {
+    if (quantity > 0) {
+      this.cartService.updateQuantity(productId, quantity);
+    }
+  }
+
+  removeFromCart(productId: number) {
+    this.cartService.removeFromCart(productId);
+    alert('Product removed from cart');
+  }
 }
