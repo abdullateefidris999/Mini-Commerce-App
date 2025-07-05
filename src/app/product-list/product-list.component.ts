@@ -3,6 +3,8 @@ import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
 import { AsyncPipe, CommonModule, CurrencyPipe } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-list',
@@ -15,7 +17,8 @@ export class ProductListComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -29,6 +32,17 @@ export class ProductListComponent implements OnInit {
 
   addToCart(productId: number) {
     this.cartService.addToCart(productId);
-    alert('Product added to cart'); // Replaced MatSnackBar
+    Swal.fire({
+      title: 'Success!',
+      text: 'Product added to cart',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: 'Go to Cart',
+      cancelButtonText: 'Continue Shopping'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/cart']);
+      }
+    });
   }
 }

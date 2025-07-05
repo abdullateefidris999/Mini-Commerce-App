@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { combineLatest, map, Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../models/product';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -44,6 +45,12 @@ export class CartComponent implements OnInit {
 
   removeFromCart(productId: number) {
     this.cartService.removeFromCart(productId);
-    alert('Product removed from cart');
+    Swal.fire({
+      title: 'Removed!',
+      text: 'Product removed from cart',
+      icon: 'success',
+      timer: 1500,
+      showConfirmButton: false
+    });
   }
 }

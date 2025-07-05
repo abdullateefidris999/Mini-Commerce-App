@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
 import { AsyncPipe, CommonModule, CurrencyPipe } from '@angular/common';
 import { Observable, switchMap, of } from 'rxjs';
 import { Product } from '../models/product';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
@@ -17,6 +18,7 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService,
     private cartService: CartService,
   ) {}
@@ -41,6 +43,21 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(productId: number) {
     this.cartService.addToCart(productId);
-    alert('Product added to cart');
+    Swal.fire({
+      title: 'Success!',
+      text: 'Product added to cart',
+      icon: 'success',
+      showCancelButton: true,
+      confirmButtonText: 'Go to Cart',
+      cancelButtonText: 'Continue Shopping'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/cart']);
+      }
+    });
+  }
+
+  goToCart() {
+    this.router.navigate(['/cart']);
   }
 }

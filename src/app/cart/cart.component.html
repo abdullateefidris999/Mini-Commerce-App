@@ -1,20 +1,69 @@
-<div class="max-w-2xl mx-auto p-4">
-  <h1 class="text-2xl font-bold mb-4">Shopping Cart</h1>
-  <div *ngFor="let item of cartItems$ | async" class="border-b py-2 flex justify-between items-center">
-    <div>
-      <h2 class="text-lg">{{ item.product.name }}</h2>
-      <p class="text-gray-600">{{ item.product.price | currency }} x {{ item.quantity }}</p>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-gray-800 mb-6">Shopping Cart</h1>
+  <div *ngIf="(cartItems$ | async)?.length; else emptyCart">
+    <div class="bg-white shadow-md rounded-lg overflow-hidden">
+      <table class="min-w-full">
+        <thead>
+          <tr class="bg-gray-100">
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-200">
+          <tr *ngFor="let item of cartItems$ | async">
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center">
+                <div class="flex-shrink-0 h-16 w-16">
+                  <img class="h-16 w-16 rounded-md object-cover" [src]="item.product.image" [alt]="item.product.name">
+                </div>
+                <div class="ml-4">
+                  <div class="text-sm font-medium text-gray-900">{{ item.product.name }}</div>
+                </div>
+              </div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{ item.product.price | currency }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.product.id, item.quantity)" class="w-20 p-2 border border-gray-300 rounded-md text-center">
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-900">{{ item.product.price * item.quantity | currency }}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <button (click)="removeFromCart(item.product.id)" class="text-red-500 hover:text-red-700 transition-colors duration-300">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="flex gap-2">
-      <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.product.id, item.quantity)"
-             class="w-16 p-1 border rounded" min="1">
-      <button (click)="removeFromCart(item.product.id)" class="text-red-500 hover:text-red-700">
-        Remove
-      </button>
+    <div class="mt-6 flex justify-end">
+      <div class="w-full max-w-sm">
+        <div class="bg-white shadow-md rounded-lg p-6">
+          <div class="flex justify-between items-center mb-4">
+            <span class="text-lg font-medium text-gray-900">Total</span>
+            <span class="text-2xl font-bold text-gray-800">{{ total$ | async | currency }}</span>
+          </div>
+          <a routerLink="/checkout" class="w-full bg-indigo-500 text-white text-center px-6 py-3 rounded-full hover:bg-indigo-600 transition-colors duration-300 block">
+            Proceed to Checkout
+          </a>
+        </div>
+      </div>
     </div>
   </div>
-  <p class="text-xl font-semibold mt-4">Total: {{ total$ | async | currency }}</p>
-  <a routerLink="/checkout" class="mt-4 inline-block bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-    Proceed to Checkout
-  </a>
+  <ng-template #emptyCart>
+    <div class="text-center py-16">
+      <svg class="w-24 h-24 mx-auto text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+      <h2 class="mt-6 text-2xl font-semibold text-gray-800">Your cart is empty</h2>
+      <p class="mt-2 text-gray-600">Looks like you haven't added anything to your cart yet.</p>
+      <a routerLink="/" class="mt-6 inline-block bg-indigo-500 text-white px-6 py-3 rounded-full hover:bg-indigo-600 transition-colors duration-300">
+        Continue Shopping
+      </a>
+    </div>
+  </ng-template>
 </div>

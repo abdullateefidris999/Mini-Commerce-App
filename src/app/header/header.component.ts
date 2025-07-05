@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe,CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [AsyncPipe, RouterModule],
+  imports: [AsyncPipe, RouterModule, CommonModule],
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {

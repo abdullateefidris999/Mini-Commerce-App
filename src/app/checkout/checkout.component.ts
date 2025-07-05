@@ -4,6 +4,7 @@ import { CartService } from '../services/cart.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-checkout',
@@ -33,7 +34,12 @@ export class CheckoutComponent {
   onSubmit() {
     // Check if form is valid
     if (this.checkoutForm.invalid) {
-      alert('Please fill out all fields.');
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please fill out all fields correctly.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
@@ -41,7 +47,16 @@ export class CheckoutComponent {
 
     const orderId = Math.floor(100000 + Math.random() * 900000);
     this.cartService.clearCart();
-    alert(`Order placed successfully! Your order ID is ${orderId}`);
-    this.router.navigate(['/checkout/success'], { queryParams: { orderId } });
+
+    Swal.fire({
+      title: 'Success!',
+      text: `Order placed successfully! Your order ID is ${orderId}`,
+      icon: 'success',
+      confirmButtonText: 'OK'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['/checkout/success'], { queryParams: { orderId } });
+      }
+    });
   }
 }
