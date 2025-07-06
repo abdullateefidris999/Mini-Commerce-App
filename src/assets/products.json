@@ -62,5 +62,37 @@
     "price": 59.99,
     "image": "/images/laptop.jpg",
     "slug": "laptop"
+  },
+  {
+    "id": 9,
+    "name": "Smartphone",
+    "description": "Latest smartphone with advanced camera features.",
+    "price": 699.99,
+    "image": "/images/smartphone.jpg",
+    "slug": "smartphone"
+  },
+  {
+    "id": 10,
+    "name": "Tablet",
+    "description": "10-inch tablet with high-resolution display.",
+    "price": 349.99,
+    "image": "/images/tablet.jpg",
+    "slug": "tablet"
+  },
+  {
+    "id":11,
+    "name":"sneakers",
+    "description": "Comfortable and stylish sneakers for everyday wear.",
+    "price": 59.99,
+    "image": "/images/sneakers.jpg",
+    "slug": "sneakers"
+  },
+  {
+    "id": 12,
+    "name": "Backpack",
+    "description": "Durable backpack with multiple compartments.",
+    "price": 39.99,
+    "image": "/images/backpack.jpg",
+    "slug": "backpack"
   }
 ]
