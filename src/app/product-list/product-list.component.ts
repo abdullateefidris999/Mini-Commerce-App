@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Product } from '../models/product';
 import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
 import { AsyncPipe, CommonModule, CurrencyPipe } from '@angular/common';
@@ -13,13 +15,11 @@ import Swal from 'sweetalert2';
   templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-  products$!: any;
+  private productService = inject(ProductService);
+  private cartService = inject(CartService);
+  private router = inject(Router);
 
-  constructor(
-    private productService: ProductService,
-    private cartService: CartService,
-    private router: Router
-  ) {}
+  products$!: Observable<Product[]>;
 
   ngOnInit() {
     this.products$ = this.productService.products$;

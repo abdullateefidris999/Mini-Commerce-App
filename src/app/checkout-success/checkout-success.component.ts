@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
@@ -8,9 +8,9 @@ import { ActivatedRoute, RouterModule } from '@angular/router';
   templateUrl: './checkout-success.component.html'
 })
 export class CheckoutSuccessComponent implements OnInit {
-  orderId: number | null = null;
+  private route = inject(ActivatedRoute);
 
-  constructor(private route: ActivatedRoute) {}
+  orderId: number | null = null;
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {

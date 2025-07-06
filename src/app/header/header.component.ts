@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { AsyncPipe,CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -11,8 +11,8 @@ import { map, Observable } from 'rxjs';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent implements OnInit {
+  private cartService = inject(CartService);
 
-  constructor(private cartService: CartService) {}
 
   cartItemCount$!: Observable<number>;
 

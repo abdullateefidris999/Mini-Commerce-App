@@ -1,5 +1,5 @@
 // checkout.component.ts
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,19 +11,18 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule // Changed from FormsModule to ReactiveFormsModule
+    ReactiveFormsModule
   ],
   templateUrl: './checkout.component.html'
 })
 export class CheckoutComponent {
+  private cartService = inject(CartService);
+  private router = inject(Router);
+  private fb = inject(FormBuilder);
+
   checkoutForm: FormGroup;
 
-  constructor(
-    private cartService: CartService,
-    private router: Router,
-    private fb: FormBuilder
-  ) {
-    // Initialize reactive form
+  constructor() {
     this.checkoutForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -32,7 +31,6 @@ export class CheckoutComponent {
   }
 
   onSubmit() {
-    // Check if form is valid
     if (this.checkoutForm.invalid) {
       Swal.fire({
         title: 'Error!',

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../services/product.service';
 import { CartService } from '../services/cart.service';
@@ -14,14 +14,12 @@ import Swal from 'sweetalert2';
   templateUrl: './product-detail.component.html'
 })
 export class ProductDetailComponent implements OnInit {
-  product$!: Observable<Product>;
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private productService = inject(ProductService);
+  private cartService = inject(CartService);
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private productService: ProductService,
-    private cartService: CartService,
-  ) {}
+  product$!: Observable<Product>;
 
   ngOnInit() {
     this.product$ = this.route.paramMap.pipe(

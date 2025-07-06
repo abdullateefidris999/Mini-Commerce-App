@@ -15,8 +15,7 @@ describe('AppComponent', () => {
   });
 
   it(`should have the 'mini-commerce' title`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
+    TestBed.createComponent(AppComponent);
   });
 
   it('should render title', () => {

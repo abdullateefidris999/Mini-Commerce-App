@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { HttpClient } from '@angular/common/http';
@@ -9,10 +9,10 @@ import { map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
+  private http = inject(HttpClient);
+
   private productsSubject = new BehaviorSubject<Product[]>([]);
   public products$ = this.productsSubject.asObservable();
-
-  constructor(private http: HttpClient) {}
 
   fetchProducts(): Observable<Product[]> {
     const products = localStorage.getItem('products');

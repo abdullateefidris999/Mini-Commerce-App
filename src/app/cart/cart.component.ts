@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { ProductService } from '../services/product.service';
 import { AsyncPipe, CommonModule, CurrencyPipe } from '@angular/common';
@@ -15,13 +15,11 @@ import Swal from 'sweetalert2';
   templateUrl: './cart.component.html'
 })
 export class CartComponent implements OnInit {
-  cartItems$!: Observable<{ product: Product; quantity: number }[]>; // Explicitly define the type
-  total$!: Observable<number>; // Explicitly define the type
+  private cartService = inject(CartService);
+  private productService = inject(ProductService);
 
-  constructor(
-    private cartService: CartService,
-    private productService: ProductService,
-  ) {}
+  cartItems$!: Observable<{ product: Product; quantity: number }[]>; // Explicitly define the type
+  total$!: Observable<number>;
 
   ngOnInit() {
     // Initialize cartItems$ and total$ inside ngOnInit
